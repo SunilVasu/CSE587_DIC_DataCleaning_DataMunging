@@ -1,0 +1,16 @@
+#install.packages("gdata",repos="http://cran.us.r-project.org/")
+require(gdata)
+library(plyr)
+mtn <- read.csv("/home/sunil/WorkSpace/R/DIC_Lab2/rollingsales_manhattan.csv")
+head(mtn)
+
+mtn$SALE.PRICE.N <- as.numeric(gsub("[^[:digit:]]","", mtn$SALE.PRICE))
+count(is.na(mtn$SALE.PRICE.N))
+names(mtn) <- tolower(names(mtn))
+
+mtn$gross.sqft<- as.numeric(gsub("[^[:digit:]]","",mtn$gross.square.feet))
+attach(mtn)
+hist(SALE.PRICE.N)
+hist(SALE.PRICE.N[])
+hist(gross.sqft[SALE.PRICE.N!=0])
+detach(mtn)
